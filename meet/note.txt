@@ -1,0 +1,13 @@
+The solution is a bottom-up exhaustion method.
+It constructs a 2D list for n fields, for each field it contains a list of all possible time consumptions from field 1 to this field for both cows. To calculate the time consumptions for field k, it simply scanning the time consumptions list of every previous fields(2...k-1). For each field, let's say field t(2<=t<=k-1), its time consumptions added by the time consumption of path(t->k) turn out to be all the time consumptions of field k which the previous field on this path is t.
+I've found a bound of this algorithm with n is O(n^3), but haven't found a tighter bound with m.
+Implement:
+1.Quick sort the input paths according to their start and destination:
+For two paths p1(s1,d1) and p2(s2,d2), p1<p2 if d2>d1 or (d2=d1 and s2>s1);
+This step takes O(mlogm) time, since m is bounded by n^2, it's also O(n^2logn)
+2.Construct the time consumption list of each field incrementally.
+This step takes O(1+2+4+...+(n(n-1)/2+1)=O(1+2^2+3^2+...+n^2)=O(n^3);
+3.Get the minimum time consumption list of field n, if exists:
+Scan all possible time consumptions for Bessie into a hash set. Takes O(m)=O(n^2);
+Scan all possible time consumptions for Elsie, for each value in it check if it exists in Bessie's time set, if so and it smaller than current result, update it. Takes O(m)=O(n^2).
+Finally it's O(n^3)

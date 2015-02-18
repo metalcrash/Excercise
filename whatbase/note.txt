@@ -1,0 +1,1 @@
+Enumerate x, then for each value of x, solve the equation that both 3 digits numbers' value are equal with variable y. If it has a positive root and its value is integer and it's in the range of [10,15000], it's the valid result.
